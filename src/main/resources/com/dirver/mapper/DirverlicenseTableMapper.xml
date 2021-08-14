@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dirver.mapper.DirverlicenseTableMapper" >
+  <resultMap id="BaseResultMap" type="com.dirver.pojo.DirverlicenseTable" >
+    <id column="license_id" property="licenseId" jdbcType="INTEGER" />
+    <result column="license_userName" property="licenseUsername" jdbcType="VARCHAR" />
+    <result column="license_phone" property="licensePhone" jdbcType="VARCHAR" />
+    <result column="license_userID" property="licenseUserid" jdbcType="VARCHAR" />
+    <result column="license_carType" property="licenseCartype" jdbcType="VARCHAR" />
+    <result column="license_time" property="licenseTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    license_id, license_userName, license_phone, license_userID, license_carType, license_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dirver.pojo.DirverlicenseTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dirverlicense_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dirverlicense_table
+    where license_id = #{licenseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dirverlicense_table
+    where license_id = #{licenseId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dirver.pojo.DirverlicenseTableExample" >
+    delete from dirverlicense_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dirver.pojo.DirverlicenseTable" >
+    insert into dirverlicense_table (license_id, license_userName, license_phone, 
+      license_userID, license_carType, license_time
+      )
+    values (#{licenseId,jdbcType=INTEGER}, #{licenseUsername,jdbcType=VARCHAR}, #{licensePhone,jdbcType=VARCHAR}, 
+      #{licenseUserid,jdbcType=VARCHAR}, #{licenseCartype,jdbcType=VARCHAR}, #{licenseTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dirver.pojo.DirverlicenseTable" >
+    insert into dirverlicense_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="licenseId != null" >
+        license_id,
+      </if>
+      <if test="licenseUsername != null" >
+        license_userName,
+      </if>
+      <if test="licensePhone != null" >
+        license_phone,
+      </if>
+      <if test="licenseUserid != null" >
+        license_userID,
+      </if>
+      <if test="licenseCartype != null" >
+        license_carType,
+      </if>
+      <if test="licenseTime != null" >
+        license_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="licenseId != null" >
+        #{licenseId,jdbcType=INTEGER},
+      </if>
+      <if test="licenseUsername != null" >
+        #{licenseUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePhone != null" >
+        #{licensePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseUserid != null" >
+        #{licenseUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseCartype != null" >
+        #{licenseCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseTime != null" >
+        #{licenseTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dirver.pojo.DirverlicenseTableExample" resultType="java.lang.Integer" >
+    select count(*) from dirverlicense_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dirverlicense_table
+    <set >
+      <if test="record.licenseId != null" >
+        license_id = #{record.licenseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.licenseUsername != null" >
+        license_userName = #{record.licenseUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licensePhone != null" >
+        license_phone = #{record.licensePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseUserid != null" >
+        license_userID = #{record.licenseUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseCartype != null" >
+        license_carType = #{record.licenseCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseTime != null" >
+        license_time = #{record.licenseTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dirverlicense_table
+    set license_id = #{record.licenseId,jdbcType=INTEGER},
+      license_userName = #{record.licenseUsername,jdbcType=VARCHAR},
+      license_phone = #{record.licensePhone,jdbcType=VARCHAR},
+      license_userID = #{record.licenseUserid,jdbcType=VARCHAR},
+      license_carType = #{record.licenseCartype,jdbcType=VARCHAR},
+      license_time = #{record.licenseTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dirver.pojo.DirverlicenseTable" >
+    update dirverlicense_table
+    <set >
+      <if test="licenseUsername != null" >
+        license_userName = #{licenseUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePhone != null" >
+        license_phone = #{licensePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseUserid != null" >
+        license_userID = #{licenseUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseCartype != null" >
+        license_carType = #{licenseCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseTime != null" >
+        license_time = #{licenseTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where license_id = #{licenseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dirver.pojo.DirverlicenseTable" >
+    update dirverlicense_table
+    set license_userName = #{licenseUsername,jdbcType=VARCHAR},
+      license_phone = #{licensePhone,jdbcType=VARCHAR},
+      license_userID = #{licenseUserid,jdbcType=VARCHAR},
+      license_carType = #{licenseCartype,jdbcType=VARCHAR},
+      license_time = #{licenseTime,jdbcType=VARCHAR}
+    where license_id = #{licenseId,jdbcType=INTEGER}
+  </update>
+</mapper>

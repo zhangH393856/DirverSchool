@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dirver.mapper.AppointmentexamTableMapper" >
+  <resultMap id="BaseResultMap" type="com.dirver.pojo.AppointmentexamTable" >
+    <id column="appointment_id" property="appointmentId" jdbcType="INTEGER" />
+    <result column="appointment_userName" property="appointmentUsername" jdbcType="VARCHAR" />
+    <result column="appointment_carType" property="appointmentCartype" jdbcType="VARCHAR" />
+    <result column="appointment_projectType" property="appointmentProjecttype" jdbcType="VARCHAR" />
+    <result column="appointment_Time" property="appointmentTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    appointment_id, appointment_userName, appointment_carType, appointment_projectType, 
+    appointment_Time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dirver.pojo.AppointmentexamTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from appointmentexam_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from appointmentexam_table
+    where appointment_id = #{appointmentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from appointmentexam_table
+    where appointment_id = #{appointmentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dirver.pojo.AppointmentexamTableExample" >
+    delete from appointmentexam_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dirver.pojo.AppointmentexamTable" >
+    insert into appointmentexam_table (appointment_id, appointment_userName, 
+      appointment_carType, appointment_projectType, 
+      appointment_Time)
+    values (#{appointmentId,jdbcType=INTEGER}, #{appointmentUsername,jdbcType=VARCHAR}, 
+      #{appointmentCartype,jdbcType=VARCHAR}, #{appointmentProjecttype,jdbcType=VARCHAR}, 
+      #{appointmentTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dirver.pojo.AppointmentexamTable" >
+    insert into appointmentexam_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appointmentId != null" >
+        appointment_id,
+      </if>
+      <if test="appointmentUsername != null" >
+        appointment_userName,
+      </if>
+      <if test="appointmentCartype != null" >
+        appointment_carType,
+      </if>
+      <if test="appointmentProjecttype != null" >
+        appointment_projectType,
+      </if>
+      <if test="appointmentTime != null" >
+        appointment_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appointmentId != null" >
+        #{appointmentId,jdbcType=INTEGER},
+      </if>
+      <if test="appointmentUsername != null" >
+        #{appointmentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentCartype != null" >
+        #{appointmentCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentProjecttype != null" >
+        #{appointmentProjecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentTime != null" >
+        #{appointmentTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dirver.pojo.AppointmentexamTableExample" resultType="java.lang.Integer" >
+    select count(*) from appointmentexam_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update appointmentexam_table
+    <set >
+      <if test="record.appointmentId != null" >
+        appointment_id = #{record.appointmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appointmentUsername != null" >
+        appointment_userName = #{record.appointmentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointmentCartype != null" >
+        appointment_carType = #{record.appointmentCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointmentProjecttype != null" >
+        appointment_projectType = #{record.appointmentProjecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointmentTime != null" >
+        appointment_Time = #{record.appointmentTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update appointmentexam_table
+    set appointment_id = #{record.appointmentId,jdbcType=INTEGER},
+      appointment_userName = #{record.appointmentUsername,jdbcType=VARCHAR},
+      appointment_carType = #{record.appointmentCartype,jdbcType=VARCHAR},
+      appointment_projectType = #{record.appointmentProjecttype,jdbcType=VARCHAR},
+      appointment_Time = #{record.appointmentTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dirver.pojo.AppointmentexamTable" >
+    update appointmentexam_table
+    <set >
+      <if test="appointmentUsername != null" >
+        appointment_userName = #{appointmentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentCartype != null" >
+        appointment_carType = #{appointmentCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentProjecttype != null" >
+        appointment_projectType = #{appointmentProjecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentTime != null" >
+        appointment_Time = #{appointmentTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where appointment_id = #{appointmentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dirver.pojo.AppointmentexamTable" >
+    update appointmentexam_table
+    set appointment_userName = #{appointmentUsername,jdbcType=VARCHAR},
+      appointment_carType = #{appointmentCartype,jdbcType=VARCHAR},
+      appointment_projectType = #{appointmentProjecttype,jdbcType=VARCHAR},
+      appointment_Time = #{appointmentTime,jdbcType=VARCHAR}
+    where appointment_id = #{appointmentId,jdbcType=INTEGER}
+  </update>
+</mapper>

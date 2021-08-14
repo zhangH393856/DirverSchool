@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dirver.mapper.SignupTableMapper" >
+  <resultMap id="BaseResultMap" type="com.dirver.pojo.SignupTable" >
+    <id column="signup_id" property="signupId" jdbcType="INTEGER" />
+    <result column="signup_name" property="signupName" jdbcType="VARCHAR" />
+    <result column="signup_carType" property="signupCartype" jdbcType="VARCHAR" />
+    <result column="signup_coachName" property="signupCoachname" jdbcType="VARCHAR" />
+    <result column="signup_coachPhone" property="signupCoachphone" jdbcType="VARCHAR" />
+    <result column="signup_phone" property="signupPhone" jdbcType="VARCHAR" />
+    <result column="signup_time" property="signupTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    signup_id, signup_name, signup_carType, signup_coachName, signup_coachPhone, signup_phone, 
+    signup_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dirver.pojo.SignupTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from signup_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from signup_table
+    where signup_id = #{signupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from signup_table
+    where signup_id = #{signupId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dirver.pojo.SignupTableExample" >
+    delete from signup_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dirver.pojo.SignupTable" >
+    insert into signup_table (signup_id, signup_name, signup_carType, 
+      signup_coachName, signup_coachPhone, signup_phone, 
+      signup_time)
+    values (#{signupId,jdbcType=INTEGER}, #{signupName,jdbcType=VARCHAR}, #{signupCartype,jdbcType=VARCHAR}, 
+      #{signupCoachname,jdbcType=VARCHAR}, #{signupCoachphone,jdbcType=VARCHAR}, #{signupPhone,jdbcType=VARCHAR}, 
+      #{signupTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dirver.pojo.SignupTable" >
+    insert into signup_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="signupId != null" >
+        signup_id,
+      </if>
+      <if test="signupName != null" >
+        signup_name,
+      </if>
+      <if test="signupCartype != null" >
+        signup_carType,
+      </if>
+      <if test="signupCoachname != null" >
+        signup_coachName,
+      </if>
+      <if test="signupCoachphone != null" >
+        signup_coachPhone,
+      </if>
+      <if test="signupPhone != null" >
+        signup_phone,
+      </if>
+      <if test="signupTime != null" >
+        signup_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="signupId != null" >
+        #{signupId,jdbcType=INTEGER},
+      </if>
+      <if test="signupName != null" >
+        #{signupName,jdbcType=VARCHAR},
+      </if>
+      <if test="signupCartype != null" >
+        #{signupCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="signupCoachname != null" >
+        #{signupCoachname,jdbcType=VARCHAR},
+      </if>
+      <if test="signupCoachphone != null" >
+        #{signupCoachphone,jdbcType=VARCHAR},
+      </if>
+      <if test="signupPhone != null" >
+        #{signupPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="signupTime != null" >
+        #{signupTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dirver.pojo.SignupTableExample" resultType="java.lang.Integer" >
+    select count(*) from signup_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update signup_table
+    <set >
+      <if test="record.signupId != null" >
+        signup_id = #{record.signupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.signupName != null" >
+        signup_name = #{record.signupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signupCartype != null" >
+        signup_carType = #{record.signupCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signupCoachname != null" >
+        signup_coachName = #{record.signupCoachname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signupCoachphone != null" >
+        signup_coachPhone = #{record.signupCoachphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signupPhone != null" >
+        signup_phone = #{record.signupPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signupTime != null" >
+        signup_time = #{record.signupTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update signup_table
+    set signup_id = #{record.signupId,jdbcType=INTEGER},
+      signup_name = #{record.signupName,jdbcType=VARCHAR},
+      signup_carType = #{record.signupCartype,jdbcType=VARCHAR},
+      signup_coachName = #{record.signupCoachname,jdbcType=VARCHAR},
+      signup_coachPhone = #{record.signupCoachphone,jdbcType=VARCHAR},
+      signup_phone = #{record.signupPhone,jdbcType=VARCHAR},
+      signup_time = #{record.signupTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dirver.pojo.SignupTable" >
+    update signup_table
+    <set >
+      <if test="signupName != null" >
+        signup_name = #{signupName,jdbcType=VARCHAR},
+      </if>
+      <if test="signupCartype != null" >
+        signup_carType = #{signupCartype,jdbcType=VARCHAR},
+      </if>
+      <if test="signupCoachname != null" >
+        signup_coachName = #{signupCoachname,jdbcType=VARCHAR},
+      </if>
+      <if test="signupCoachphone != null" >
+        signup_coachPhone = #{signupCoachphone,jdbcType=VARCHAR},
+      </if>
+      <if test="signupPhone != null" >
+        signup_phone = #{signupPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="signupTime != null" >
+        signup_time = #{signupTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where signup_id = #{signupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dirver.pojo.SignupTable" >
+    update signup_table
+    set signup_name = #{signupName,jdbcType=VARCHAR},
+      signup_carType = #{signupCartype,jdbcType=VARCHAR},
+      signup_coachName = #{signupCoachname,jdbcType=VARCHAR},
+      signup_coachPhone = #{signupCoachphone,jdbcType=VARCHAR},
+      signup_phone = #{signupPhone,jdbcType=VARCHAR},
+      signup_time = #{signupTime,jdbcType=VARCHAR}
+    where signup_id = #{signupId,jdbcType=INTEGER}
+  </update>
+</mapper>

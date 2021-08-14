@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dirver.mapper.ModelTableMapper" >
+  <resultMap id="BaseResultMap" type="com.dirver.pojo.ModelTable" >
+    <id column="model_id" property="modelId" jdbcType="INTEGER" />
+    <result column="model_A1cost" property="modelA1cost" jdbcType="DOUBLE" />
+    <result column="model_A2cost" property="modelA2cost" jdbcType="DOUBLE" />
+    <result column="model_A3cost" property="modelA3cost" jdbcType="DOUBLE" />
+    <result column="model_B1cost" property="modelB1cost" jdbcType="DOUBLE" />
+    <result column="model_B2cost" property="modelB2cost" jdbcType="DOUBLE" />
+    <result column="model_C1cost" property="modelC1cost" jdbcType="DOUBLE" />
+    <result column="model_C2cost" property="modelC2cost" jdbcType="DOUBLE" />
+    <result column="model_C3cost" property="modelC3cost" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    model_id, model_A1cost, model_A2cost, model_A3cost, model_B1cost, model_B2cost, model_C1cost, 
+    model_C2cost, model_C3cost
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dirver.pojo.ModelTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from model_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from model_table
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from model_table
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dirver.pojo.ModelTableExample" >
+    delete from model_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dirver.pojo.ModelTable" >
+    insert into model_table (model_id, model_A1cost, model_A2cost, 
+      model_A3cost, model_B1cost, model_B2cost, 
+      model_C1cost, model_C2cost, model_C3cost
+      )
+    values (#{modelId,jdbcType=INTEGER}, #{modelA1cost,jdbcType=DOUBLE}, #{modelA2cost,jdbcType=DOUBLE}, 
+      #{modelA3cost,jdbcType=DOUBLE}, #{modelB1cost,jdbcType=DOUBLE}, #{modelB2cost,jdbcType=DOUBLE}, 
+      #{modelC1cost,jdbcType=DOUBLE}, #{modelC2cost,jdbcType=DOUBLE}, #{modelC3cost,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dirver.pojo.ModelTable" >
+    insert into model_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelA1cost != null" >
+        model_A1cost,
+      </if>
+      <if test="modelA2cost != null" >
+        model_A2cost,
+      </if>
+      <if test="modelA3cost != null" >
+        model_A3cost,
+      </if>
+      <if test="modelB1cost != null" >
+        model_B1cost,
+      </if>
+      <if test="modelB2cost != null" >
+        model_B2cost,
+      </if>
+      <if test="modelC1cost != null" >
+        model_C1cost,
+      </if>
+      <if test="modelC2cost != null" >
+        model_C2cost,
+      </if>
+      <if test="modelC3cost != null" >
+        model_C3cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="modelA1cost != null" >
+        #{modelA1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelA2cost != null" >
+        #{modelA2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelA3cost != null" >
+        #{modelA3cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelB1cost != null" >
+        #{modelB1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelB2cost != null" >
+        #{modelB2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelC1cost != null" >
+        #{modelC1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelC2cost != null" >
+        #{modelC2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelC3cost != null" >
+        #{modelC3cost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dirver.pojo.ModelTableExample" resultType="java.lang.Integer" >
+    select count(*) from model_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update model_table
+    <set >
+      <if test="record.modelId != null" >
+        model_id = #{record.modelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modelA1cost != null" >
+        model_A1cost = #{record.modelA1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.modelA2cost != null" >
+        model_A2cost = #{record.modelA2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.modelA3cost != null" >
+        model_A3cost = #{record.modelA3cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.modelB1cost != null" >
+        model_B1cost = #{record.modelB1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.modelB2cost != null" >
+        model_B2cost = #{record.modelB2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.modelC1cost != null" >
+        model_C1cost = #{record.modelC1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.modelC2cost != null" >
+        model_C2cost = #{record.modelC2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.modelC3cost != null" >
+        model_C3cost = #{record.modelC3cost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update model_table
+    set model_id = #{record.modelId,jdbcType=INTEGER},
+      model_A1cost = #{record.modelA1cost,jdbcType=DOUBLE},
+      model_A2cost = #{record.modelA2cost,jdbcType=DOUBLE},
+      model_A3cost = #{record.modelA3cost,jdbcType=DOUBLE},
+      model_B1cost = #{record.modelB1cost,jdbcType=DOUBLE},
+      model_B2cost = #{record.modelB2cost,jdbcType=DOUBLE},
+      model_C1cost = #{record.modelC1cost,jdbcType=DOUBLE},
+      model_C2cost = #{record.modelC2cost,jdbcType=DOUBLE},
+      model_C3cost = #{record.modelC3cost,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dirver.pojo.ModelTable" >
+    update model_table
+    <set >
+      <if test="modelA1cost != null" >
+        model_A1cost = #{modelA1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelA2cost != null" >
+        model_A2cost = #{modelA2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelA3cost != null" >
+        model_A3cost = #{modelA3cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelB1cost != null" >
+        model_B1cost = #{modelB1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelB2cost != null" >
+        model_B2cost = #{modelB2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelC1cost != null" >
+        model_C1cost = #{modelC1cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelC2cost != null" >
+        model_C2cost = #{modelC2cost,jdbcType=DOUBLE},
+      </if>
+      <if test="modelC3cost != null" >
+        model_C3cost = #{modelC3cost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dirver.pojo.ModelTable" >
+    update model_table
+    set model_A1cost = #{modelA1cost,jdbcType=DOUBLE},
+      model_A2cost = #{modelA2cost,jdbcType=DOUBLE},
+      model_A3cost = #{modelA3cost,jdbcType=DOUBLE},
+      model_B1cost = #{modelB1cost,jdbcType=DOUBLE},
+      model_B2cost = #{modelB2cost,jdbcType=DOUBLE},
+      model_C1cost = #{modelC1cost,jdbcType=DOUBLE},
+      model_C2cost = #{modelC2cost,jdbcType=DOUBLE},
+      model_C3cost = #{modelC3cost,jdbcType=DOUBLE}
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </update>
+</mapper>
